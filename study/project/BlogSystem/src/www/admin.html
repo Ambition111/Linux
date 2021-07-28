@@ -73,9 +73,9 @@
 
 <!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed">
-    <div class="am-u-md-8 am-u-sm-12" v-if="sblog==null">
+    <div class="am-u-md-8 am-u-sm-12" v-if="sblog.id==null">
         <!--v-if的判断非常有必要，博客页面的渲染必须在保证获取到了标签信息以及用户信息之后再去渲染-->
-        <article class="am-g blog-entry-article" v-for="blog in blogs" v-if="tags.length>0 && users.length>0">
+        <article class="am-g blog-entry-article" v-for="blog in blogs" v-show="tags.length>0 && users.length>0">
             <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img">
                 <img src="assets/i/f18.jpg" alt="" class="am-u-sm-12">
             </div>
@@ -96,7 +96,7 @@
         </ul>
     </div>
 
-    <div id="test-editormd" class="am-u-md-8 am-u-sm-12" v-if="sblog!=null">
+    <div id="test-editormd" class="am-u-md-8 am-u-sm-12" v-show="sblog.id!=null">
         <textarea v-model="sblog.content">{{sblog.content}}</textarea>
     </div>
 
@@ -164,7 +164,13 @@
             blogs:[],
             tags:[],
             users:[],
-            sblog:null
+            sblog:{
+                id:null,
+                tag_id:null,
+                user_id:null,
+                title:null,
+                content:null
+            }
         },
         methods:{               // vue对象中方法
             get_allblogs : function(){
